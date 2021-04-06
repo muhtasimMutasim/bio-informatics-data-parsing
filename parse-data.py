@@ -46,9 +46,18 @@ def test_pandas():
     # For adding new row in dataframe
     values, headers = taxtable_dict()
 
-    df = pandas.read_csv( "qiimedata/OTUS.csv" )
+    df = pandas.read_csv( "qiimedata/OTUS.csv")
     print( df )
     print("\n\n\n")
+    # new_column_names = df[ 'Sample' ]
+
+    # cnames = [ i for i in new_column_names ]
+    # cnames.insert(0, "Samples")
+
+    # print( cnames )
+    # df2 = pandas.DataFrame( df, names=cnames )
+    # print( df2 )
+    
 
     # print( values )
     # df.loc[ -1 ] = [ str(i.values()) for i in values ]
