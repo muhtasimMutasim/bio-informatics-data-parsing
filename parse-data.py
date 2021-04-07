@@ -2,9 +2,15 @@ import pandas
 import csv
 
 
-# Gets the OTUS csv file data
-def get_otus_csv():
+# global variable for printing new line
+def pn():
+    return print("\n\n")
 
+
+def get_csv_data():
+    """
+        Function for retrieving file data
+    """
     file = "qiimedata/OTUS.csv"
 
     with open(file, "r") as f:
@@ -13,9 +19,10 @@ def get_otus_csv():
         return data
 
 
-# Reads Taxatable.csv and returns a dictionary
 def taxtable_dict():
-
+    """
+        - Reads Taxatable.csv and returns a dictionary with headers.
+    """
     file = "qiimedata/Taxatable.csv"
 
     ttable = []
@@ -40,8 +47,12 @@ def taxtable_dict():
         return values, headers
 
 
-# Putting OTUS.csv into dataframe
-def test_pandas():
+def create_dataframe():
+    """
+    - Putting OTUS.csv into dataframe & formatting the data.
+    - Taking formatted data and transposing dataframe for ideal structure.
+    - Adding a new column with samples bacertia description.
+    """
 
     # For adding new row in dataframe
     values, headers = taxtable_dict()
@@ -51,14 +62,13 @@ def test_pandas():
     # Transposed data so that the first row and columns switched
     df = df.set_index('Sample').transpose()
 
-    # print("\n\n")
+    # pn
     # print( list(df.columns) )
-    print("\n\n")
+    pn()
     print("First Data Frame\n df")
     print( df )
-    print("\n")
+    pn()
 
-    ab = 0
     descriptions = []
     ddict = {}
 
@@ -84,16 +94,19 @@ def test_pandas():
         # print( a )
 
     # Using DataFrame.insert() to add a column named "Descriptions" to dataframe
+    # Uncomment if you want to make changes to the original dataframe.
     # df.insert(1, "Description", descriptions, True)
 
     # If you dont want to change the first dataframe this line
     # creates a new dataframe from the old one with reindexing
     df2 = df.reindex(['Description', *df.columns], axis=1).assign(Description=descriptions)
 
-    print("\n\n")
-    print("Second Data Frame\n df2\n\n")
+    # pn()
+    print("\nSecond Data Frame\n df2\n\n")
     print( df2 )
-    print("\n\n")
+    pn()
+    
+    return df2
 
     
 
@@ -101,10 +114,9 @@ def test_pandas():
 
 
 def test():
-    # otus_csv_data = get_otus_csv()
-    # print(otus_csv_data)
-
-    test_pandas()
+    
+    # Function creates ideal dataframe with pandas.
+    create_dataframe()
 
 
 
