@@ -1,6 +1,8 @@
 import pandas
 import csv
-
+import sys
+import os.path
+from os import path
 
 # global variable for printing new line
 def pn():
@@ -108,23 +110,49 @@ def create_dataframe():
     
     return df2
 
+
+
+
+def write_csv():
+    """
+        Writes dataframe to csv.
+    """
     
+    try:
 
-
-
-
-def test():
+        if not sys.argv[1] or sys.argv[1] == "":
+            error = '\n\nAn argument is required to run this script. The Argument should be the desired file name \n\n'
+            error = error + " Example of how to run the script:\npython3 parse-data.py test.csv\n\n"
+            sys.exit(error)
     
+    except IndexError:
+
+        error = '\n\nAn argument is required to run this script. The Argument should be the desired file name \n\n'
+        error = error + " Example of how to run the script:\n\n\t python3 parse-data.py test.csv\n\n"
+        sys.exit(error)
+
+    # Checks if the qiimedata folder exists. 
+    if path.isdir('qiimedata') == False:
+        sys.exit('\n\n"qiimedata" Directory Does not exist. Script cant run without it. \n\n')
+    
+    # Checks if file with given name already exists
+    file_name = "qiimedata/" + sys.argv[1]
+    file_exists = path.isfile(file_name)
+    print( f"\nGiven Filename {sys.argv[1]} Exists?: {file_exists}\n\n" )
+
+    if file_exists == True:
+        sys.exit("File Already exists")
     # Function creates ideal dataframe with pandas.
-    create_dataframe()
+    df = create_dataframe()
+    df.to_csv(file_name, sep=',')
 
+    print("\n\nFile has been created successfully in the qiimedata directory\n\n")
 
 
 
 
 def main():
-
-    test()
+    write_csv()
 
 
 if __name__ == "__main__":
