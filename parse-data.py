@@ -50,12 +50,51 @@ def test_pandas():
     df = pandas.read_csv( "qiimedata/OTUS.csv")
     # Transposed data so that the first row and columns switched
     df = df.set_index('Sample').transpose()
-    colmns = list(df.columns)
 
-    print( colmns )
-    print("\n\n\n")
+    # print("\n\n")
+    # print( list(df.columns) )
+    print("\n\n")
+    print("First Data Frame\n df")
     print( df )
-    print("\n\n\n")
+    print("\n")
+
+    ab = 0
+    descriptions = []
+    ddict = {}
+
+    for index, row in df.iterrows():
+
+        # Gets the name of the column
+        name = f"{index}".strip()
+
+        # Cleans data and converts to a list
+        # With option to take out "NA" values
+        value = next( ( list( line.values() ) for line in values if line[headers[0]] == name), None )
+        value_without_na = [ i for i in value if i != "NA" and i != name ] 
+        value.remove(name) # Removes name from list
+
+        # Removes list properties from the string and replaces the commas for | character
+        value = str(value).replace("[", "").replace("]", "").replace("'", "", 100).replace(",", " |", 100)
+        value = f"| {value} |"
+        ddict[name] = value
+
+        # Appends to an empty list
+        descriptions.append(value)
+        # a = f"\n\n{value}"
+        # print( a )
+
+    # Using DataFrame.insert() to add a column named "Descriptions" to dataframe
+    # df.insert(1, "Description", descriptions, True)
+
+    # If you dont want to change the first dataframe this line
+    # creates a new dataframe from the old one with reindexing
+    df2 = df.reindex(['Description', *df.columns], axis=1).assign(Description=descriptions)
+
+    print("\n\n")
+    print("Second Data Frame\n df2\n\n")
+    print( df2 )
+    print("\n\n")
+
     
 
 
