@@ -1,0 +1,14 @@
+Sample	Group	Treatment	Study	Animal model	Gender	Cage
+GrI1	GrI	P.gingivalis	NAFLD	db	M	1
+GrI2	GrI	P.gingivalis	NAFLD	db	M	1
+GrI3	GrI	P.gingivalis	NAFLD	db	M	1
+GrI4	GrI	P.gingivalis	NAFLD	db	M	2
+GrI5	GrI	P.gingivalis	NAFLD	db	M	2
+GrI6	GrI	P.gingivalis	NAFLD	db	M	2
+GrI7	GrI	P.gingivalis	NAFLD	db	M	3
+GrI8	GrI	P.gingivalis	NAFLD	db	M	3
+GrIII1	GrIII	Control	NAFLD	db	M	7
+GrIII2	GrIII	Control	NAFLD	db	M	7
+GrIII3	GrIII	Control	NAFLD	db	M	7
+Control-5	GrIII	Control	NAFLD	db	M	8
+Control-6	GrIII	Control	NAFLD	db	M	9
