@@ -8,22 +8,35 @@ data_url = "https://raw.githubusercontent.com/muhtasimMutasim/bio-informatics-da
 data_url_resp = requests.get( data_url )
 data = data_url_resp.text.split("\n")
 
-control5 = {}
+
+def plot_data():
+    """
+        Plots Informatics data.
+    """
+    control5 = {}
+
+    for i in data:
+        
+        #print(i)
+        data_set = i.split(",")
+        name = data_set[0].strip()
+        if name.strip() == "Sample" or i == "":
+            continue
+        #print(name)
+        cntrl_5 = data_set[2].strip()
+        control5[name] = cntrl_5
+        
+        
+    control5_list = sorted(control5.items())
+    x, y = zip(*control5_list)
+    plt.plot(x, y)
+    plt.show()
 
 
-for i in data:
-    
-    #print(i)
-    data_set = i.split(",")
-    name = data_set[0].strip()
-    if name.strip() == "Sample" or i == "":
-        continue
-    #print(name)
-    cntrl_5 = data_set[2].strip()
-    control5[name] = cntrl_5
-    
-    
-control5_list = sorted(control5.items())
-x, y = zip(*control5_list)
-plt.plot(x, y)
-plt.show()
+
+def main():
+    plot_data()
+
+
+if __name__ == "__main__":
+    main()

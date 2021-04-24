@@ -13,7 +13,7 @@ def get_csv_data():
     """
         Function for retrieving file data
     """
-    file = "qiimedata/OTUS.csv"
+    file = "data/OTUS.csv"
 
     with open(file, "r") as f:
 
@@ -25,7 +25,7 @@ def taxtable_dict():
     """
         - Reads Taxatable.csv and returns a dictionary with headers.
     """
-    file = "qiimedata/Taxatable.csv"
+    file = "data/Taxatable.csv"
 
     ttable = []
 
@@ -60,7 +60,7 @@ def create_dataframe():
     values, headers = taxtable_dict()
 
     # Created dataframe
-    df = pandas.read_csv( "qiimedata/OTUS.csv")
+    df = pandas.read_csv( "data/OTUS.csv")
     # Transposed data so that the first row and columns switched
     df = df.set_index('Sample').transpose()
 
@@ -132,11 +132,11 @@ def write_csv():
         sys.exit(error)
 
     # Checks if the qiimedata folder exists. 
-    if path.isdir('qiimedata') == False:
-        sys.exit('\n\n"qiimedata" Directory Does not exist. Script cant run without it. \n\n')
+    if path.isdir('data') == False:
+        sys.exit('\n\n"data" Directory Does not exist. Script cant run without it. \n\n')
     
     # Checks if file with given name already exists
-    file_name = "qiimedata/" + sys.argv[1]
+    file_name = "data/" + sys.argv[1]
     file_exists = path.isfile(file_name)
     print( f"\nGiven Filename {sys.argv[1]} Exists?: {file_exists}\n\n" )
 
